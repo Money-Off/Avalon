@@ -13,10 +13,10 @@
   </Design.DataContext>
 	<Grid ShowGridLines="True" ColumnDefinitions="120, 100" RowDefinitions="Auto,Auto,Auto">
 		<Label Grid.Row="0" Grid.Column="0" Margin="10">Celsius</Label>
-		<TextBox Grid.Row="0" Grid.Column="1" Margin="0 5" Name="celsius"></TextBox>
+		<TextBox Grid.Row="0" Grid.Column="1" Margin="0 5" Name="celsius" TextChanged=""></TextBox>
 		<Label Grid.Row="1" Grid.Column="0" Margin="10">Fahrenheit</Label>
-		<TextBox Grid.Row="1" Grid.Column="1" Margin="0 5" Name="fahrenheit"></TextBox>
-		<Button Grid.Row="2" Grid.Column="1" Margin="0 5" Click="ButtonClicked" TextInput="ButtonClicked" IsDefault="True">Calculate</Button>
+		<TextBox Grid.Row="1" Grid.Column="1" Margin="0 5" Name="fahrenheit" IsReadOnly="True"></TextBox>
+		<Button Grid.Row="2" Grid.Column="1" Margin="0 5" Click="ButtonClicked" IsDefault="True">Calculate</Button>
 	</Grid>
 	
 </UserControl>

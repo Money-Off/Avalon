@@ -25,4 +25,6 @@ public partial class MainView : UserControl
         }
         Debug.WriteLine($"Click! Celsius = {celsius.Text}");
     }
+
+
 }
