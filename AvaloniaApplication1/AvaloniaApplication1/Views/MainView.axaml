@@ -11,12 +11,32 @@
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
-	<Grid ShowGridLines="True" ColumnDefinitions="120, 100" RowDefinitions="Auto,Auto,Auto">
-		<Label Grid.Row="0" Grid.Column="0" Margin="10">Celsius</Label>
-		<TextBox Grid.Row="0" Grid.Column="1" Margin="0 5" Name="celsius" TextChanged=""></TextBox>
-		<Label Grid.Row="1" Grid.Column="0" Margin="10">Fahrenheit</Label>
-		<TextBox Grid.Row="1" Grid.Column="1" Margin="0 5" Name="fahrenheit" IsReadOnly="True"></TextBox>
-		<Button Grid.Row="2" Grid.Column="1" Margin="0 5" Click="ButtonClicked" IsDefault="True">Calculate</Button>
+	<Grid DataContext="{Binding MVVMSample}">
+		<TabControl>
+			<TabItem Header="ФИО">
+				<Grid ShowGridLines="False" ColumnDefinitions="120, 100" RowDefinitions="Auto,Auto,Auto" >
+					<Label Grid.Row="0" Grid.Column="0" Margin="10">FirstName</Label>
+					<TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" Margin="0 5" Name="firstName" ></TextBox>
+					<Label Grid.Row="1" Grid.Column="0" Margin="10">LastName</Label>
+					<TextBox Text="{Binding LastName}" Grid.Row="1" Grid.Column="1" Margin="0 5" Name="lastName"></TextBox>
+					<Label Grid.Row="2" Grid.Column="0" Margin="10">MiddleName</Label>
+					<TextBox Text="{Binding MiddleName}" Grid.Row="2" Grid.Column="1" Margin="0 5" Name="middleName"></TextBox>
+	
+				</Grid>
+			</TabItem>
+			<TabItem Header="Адрес">
+				<Grid ShowGridLines="False" ColumnDefinitions="120, 1000" RowDefinitions="Auto,Auto,Auto">
+					<Label Grid.Row="0" Grid.Column="0" Margin="10">Address</Label>
+					<TextBox Text="{Binding Address}" Grid.Row="0" Grid.Column="1" Margin="0 5"></TextBox>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Итоговая строка">
+				<Grid ShowGridLines="False" ColumnDefinitions="200, 1000" RowDefinitions="Auto,Auto,Auto">
+					<Label Grid.Row="0" Grid.Column="0" Margin="10">Итоговая строка</Label>
+					<TextBox Text="{Binding ResultString, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Margin="0 5" IsReadOnly="True"></TextBox>
+				</Grid>
+			</TabItem>
+		</TabControl>
 	</Grid>
 	
 </UserControl>

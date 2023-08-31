@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\AvaloniaApplication1",
+    "\\AvaloniaApplication1\\AvaloniaApplication1",
+    "\\AvaloniaApplication1\\AvaloniaApplication1\\ViewModels",
+    "\\AvaloniaApplication1\\AvaloniaApplication1\\Views"
   ],
+  "SelectedNode": "\\AvaloniaApplication1\\AvaloniaApplication1.sln",
   "PreviewInSolutionExplorer": false
 }
