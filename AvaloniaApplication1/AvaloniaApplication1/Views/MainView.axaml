@@ -12,60 +12,31 @@
     <vm:MainViewModel />
   </Design.DataContext>
 	<Grid DataContext="{Binding MVVMSample}">
-        <TabControl TabStripPlacement="Left">
-            <TabItem Header="Р¤РРћ">
-				
-				<Grid  DataContext="{Binding Employee}">
-                    <Grid ShowGridLines="False" ColumnDefinitions="120, 100" RowDefinitions="Auto,Auto,Auto" >
-                        <Label Grid.Row="0" Grid.Column="0" Margin="10">FirstName</Label>
-                        <TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" Margin="0 5" Name="firstName" ></TextBox>
-                        <Label Grid.Row="1" Grid.Column="0" Margin="10">LastName</Label>
-                        <TextBox Text="{Binding LastName}" Grid.Row="1" Grid.Column="1" Margin="0 5" Name="lastName"></TextBox>
-                        <Label Grid.Row="2" Grid.Column="0" Margin="10">MiddleName</Label>
-                        <TextBox Text="{Binding MiddleName}" Grid.Row="2" Grid.Column="1" Margin="0 5" Name="middleName"></TextBox>
-				    </Grid>
-				</Grid>
-				
-			</TabItem>
-			<TabItem Header="РђРґСЂРµСЃ">
-				<StackPanel>
-				<ListBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Addresses}" SelectedItem="{Binding SelectedAddress, Mode=TwoWay}">
-					<ListBox.ItemTemplate>
-						<DataTemplate>
-							<StackPanel Orientation="Horizontal">								    
-								<TextBlock Text="{Binding ID}" Padding="0" Height="0" />								
-								<Border BorderThickness="1" BorderBrush="Black">
-									<TextBlock Text="{Binding AddressString}" Padding="7"/>
-								</Border>
-							
-							</StackPanel>
-						</DataTemplate>
-					</ListBox.ItemTemplate>
-				</ListBox>
-				<Grid Grid.Row="1" Grid.Column="0" >
-					<Button Content="Add"/>
-				</Grid>
-				<Grid Grid.Row="2" Grid.Column="1">
-					<Button Content="Edit"/>
-				</Grid>
-				<Grid Grid.Row="3" Grid.Column="2" >
-					<Button Content="Delete"/>
-				</Grid>
-				</StackPanel>
-			</TabItem>
-            <TabItem Header="РС‚РѕРіРѕРІР°СЏ СЃС‚СЂРѕРєР°">
-                <Grid DataContext="{Binding Employee}" ShowGridLines="False" ColumnDefinitions="200, 1000" RowDefinitions="Auto,Auto,Auto">
-                    <Label Grid.Row="0" Grid.Column="0" Margin="10">РС‚РѕРіРѕРІР°СЏ СЃС‚СЂРѕРєР°</Label>
-                    <TextBox Text="{Binding ResultString, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Margin="0 5" IsReadOnly="True"></TextBox>
-					
-                </Grid>
-            </TabItem>
-			<TabItem>
-				<Grid DataContext="{Binding SelectedAddress}">
-					<TextBox Text="{Binding AddressString, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Margin="0 5" IsReadOnly="True"></TextBox>
+		<TabControl>
+			<TabItem Header="ФИО">
+				<Grid ShowGridLines="False" ColumnDefinitions="120, 100" RowDefinitions="Auto,Auto,Auto" >
+					<Label Grid.Row="0" Grid.Column="0" Margin="10">FirstName</Label>
+					<TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" Margin="0 5" Name="firstName" ></TextBox>
+					<Label Grid.Row="1" Grid.Column="0" Margin="10">LastName</Label>
+					<TextBox Text="{Binding LastName}" Grid.Row="1" Grid.Column="1" Margin="0 5" Name="lastName"></TextBox>
+					<Label Grid.Row="2" Grid.Column="0" Margin="10">MiddleName</Label>
+					<TextBox Text="{Binding MiddleName}" Grid.Row="2" Grid.Column="1" Margin="0 5" Name="middleName"></TextBox>
+	
 				</Grid>
 			</TabItem>
-        </TabControl>
-    </Grid>
-    
+			<TabItem Header="Адрес">
+				<Grid ShowGridLines="False" ColumnDefinitions="120, 1000" RowDefinitions="Auto,Auto,Auto">
+					<Label Grid.Row="0" Grid.Column="0" Margin="10">Address</Label>
+					<TextBox Text="{Binding Address}" Grid.Row="0" Grid.Column="1" Margin="0 5"></TextBox>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Итоговая строка">
+				<Grid ShowGridLines="False" ColumnDefinitions="200, 1000" RowDefinitions="Auto,Auto,Auto">
+					<Label Grid.Row="0" Grid.Column="0" Margin="10">Итоговая строка</Label>
+					<TextBox Text="{Binding ResultString, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Margin="0 5" IsReadOnly="True"></TextBox>
+				</Grid>
+			</TabItem>
+		</TabControl>
+	</Grid>
+	
 </UserControl>
