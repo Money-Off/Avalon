@@ -11,8 +11,7 @@
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
-
-	<Grid DataContext="{Binding MVVMSample}" >
+	<Grid DataContext="{Binding MVVMSample}">
         <TabControl TabStripPlacement="Left">
             <TabItem Header="ФИО">
 				
@@ -25,8 +24,8 @@
                         <Label Grid.Row="2" Grid.Column="0" Margin="10">MiddleName</Label>
                         <TextBox Text="{Binding MiddleName}" Grid.Row="2" Grid.Column="1" Margin="0 5" Name="middleName"></TextBox>
 				    </Grid>
-
 				</Grid>
+				
 			</TabItem>
 			<TabItem Header="Адреса">
 				<Grid ShowGridLines="False" ColumnDefinitions="200, 1000" RowDefinitions="Auto,Auto,Auto">
@@ -56,7 +55,7 @@
 					<TextBox Text="{Binding ResultString, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Margin="0 5" IsReadOnly="True"></TextBox>
 				</Grid>
 			</TabItem>
-		</TabControl>
-	</Grid>
-	
+        </TabControl>
+    </Grid>
+    
 </UserControl>
