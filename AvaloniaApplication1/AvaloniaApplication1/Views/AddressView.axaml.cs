@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace AvaloniaApplication1.Views
 {
-    public partial class Address : Window
+    public partial class AddressView : UserControl
     {
-        public Address()
+        public AddressView()
         {
             InitializeComponent();
         }

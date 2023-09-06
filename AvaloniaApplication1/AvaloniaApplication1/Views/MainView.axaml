@@ -13,7 +13,7 @@
   </Design.DataContext>
 	<Grid DataContext="{Binding MVVMSample}">
 		<TabControl>
-			<TabItem Header="ФИО">
+			<TabItem Header="Г”Г€ГЋ">
 				<Grid ShowGridLines="False" ColumnDefinitions="120, 100" RowDefinitions="Auto,Auto,Auto" >
 					<Label Grid.Row="0" Grid.Column="0" Margin="10">FirstName</Label>
 					<TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" Margin="0 5" Name="firstName" ></TextBox>
@@ -24,15 +24,28 @@
 	
 				</Grid>
 			</TabItem>
-			<TabItem Header="Адрес">
-				<Grid ShowGridLines="False" ColumnDefinitions="120, 1000" RowDefinitions="Auto,Auto,Auto">
-					<Label Grid.Row="0" Grid.Column="0" Margin="10">Address</Label>
-					<TextBox Text="{Binding Address}" Grid.Row="0" Grid.Column="1" Margin="0 5"></TextBox>
+			<TabItem Header="ГђВђГђВґГ‘ВЂГђВµГ‘ВЃ">
+				<StackPanel>
+				<ListBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Addresses}" SelectedItem="{Binding SelectedAddress, Mode=TwoWay}">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal">								    
+								<TextBlock Text="{Binding ID}" Padding="0" Height="0" />								
+								<Border BorderThickness="1" BorderBrush="Black">
+									<TextBlock Text="{Binding AddressString}" Padding="7"/>
+								</Border>
+							
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+				<Grid Grid.Row="1" Grid.Column="0" >
+					<Button Content="Add" Command="{Binding OpenAddress}"/>
 				</Grid>
 			</TabItem>
-			<TabItem Header="Итоговая строка">
+			<TabItem Header="Г€ГІГ®ГЈГ®ГўГ Гї Г±ГІГ°Г®ГЄГ ">
 				<Grid ShowGridLines="False" ColumnDefinitions="200, 1000" RowDefinitions="Auto,Auto,Auto">
-					<Label Grid.Row="0" Grid.Column="0" Margin="10">Итоговая строка</Label>
+					<Label Grid.Row="0" Grid.Column="0" Margin="10">Г€ГІГ®ГЈГ®ГўГ Гї Г±ГІГ°Г®ГЄГ </Label>
 					<TextBox Text="{Binding ResultString, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Margin="0 5" IsReadOnly="True"></TextBox>
 				</Grid>
 			</TabItem>
