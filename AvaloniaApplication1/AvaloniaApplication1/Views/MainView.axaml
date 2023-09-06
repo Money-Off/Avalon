@@ -43,7 +43,7 @@
 					</ListBox.ItemTemplate>
 				</ListBox>
 				<Grid Grid.Row="1" Grid.Column="0" >
-					<Button Content="Add"/>
+					<Button Content="Add" Command="{Binding OpenAddress}"/>
 				</Grid>
 				<Grid Grid.Row="2" Grid.Column="1">
 					<Button Content="Edit"/>

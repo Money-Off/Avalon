@@ -1,4 +1,6 @@
 ﻿using AvaloniaApplication1.Models;
+using AvaloniaApplication1.Views;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,7 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 
 namespace AvaloniaApplication1.ViewModels
 {
@@ -46,6 +48,7 @@ namespace AvaloniaApplication1.ViewModels
         public MVVMSample()
         {
             Employee = new Employee();
+            OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
         }
 
         public MVVMSample(Employee employee, ObservableCollection<Address> addresses, Address selectedAddress)
@@ -53,13 +56,23 @@ namespace AvaloniaApplication1.ViewModels
             Employee = employee;
             Addresses = addresses;
             SelectedAddress = selectedAddress;
+            OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
         }
 
         public MVVMSample(Employee employee)
         {
             Employee = employee;
+            OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
         }
 
+
+        public ICommand OpenAddressCommand { get; }
+
+        private void OpenAddress()
+        {
+            //var addressWindow = new AddressWindow();
+            //addressWindow.Show();
+        }
 
 
         //public event PropertyChangedEventHandler? PropertyChanged;

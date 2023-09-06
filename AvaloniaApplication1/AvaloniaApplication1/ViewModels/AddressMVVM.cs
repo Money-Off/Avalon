@@ -1,17 +1,21 @@
-﻿using AvaloniaApplication1.ViewModels;
+﻿using AvaloniaApplication1.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AvaloniaApplication1.Models
+namespace AvaloniaApplication1.ViewModels
 {
-    public class Address : BaseClass
+    public class AddressMVVM : INotifyPropertyChanged
     {
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName] string prop = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+
         private string _addressString = string.Empty;
         private Guid _id;
         private string _city = string.Empty;
@@ -28,9 +32,8 @@ namespace AvaloniaApplication1.Models
         public string Room { get => _room; set { _room = value; OnPropertyChanged(); OnPropertyChanged(nameof(AddressString)); } }
         public Guid ID { get => _id; set { _id = value; OnPropertyChanged(); } }
 
-
-        public Address(string country, string city, string street, string house, string room)
-        { 
+        public AddressMVVM(string country, string city, string street, string house, string room)
+        {
             Country = country;
             City = city;
             Street = street;
@@ -39,21 +42,20 @@ namespace AvaloniaApplication1.Models
             ID = Guid.NewGuid();
             AddressString = GetFullAddress();
         }
-        public Address()
-        { 
-            ID = Guid.NewGuid(); 
+        public AddressMVVM()
+        {
+            ID = Guid.NewGuid();
         }
 
-        public Address(AddressMVVM addressMVVM)
+        public AddressMVVM(Address address)
         {
-            Country = addressMVVM.Country;
-            City = addressMVVM.City;
-            Street = addressMVVM.Street;
-            House = addressMVVM.House;
-            Room = addressMVVM.Room;
-            ID = Guid.NewGuid();
-            AddressString = GetFullAddress();
-
+            Country = address.Country;
+            City = address.City;
+            Street = address.Street;
+            House = address.House;
+            Room = address.Room;
+            ID = address.ID;
+            AddressString = address.AddressString;
         }
 
 
@@ -67,7 +69,7 @@ namespace AvaloniaApplication1.Models
             }
             if (!string.IsNullOrWhiteSpace(City))
             {
-                fullAddress += $", {City}".Trim(' ',',');
+                fullAddress += $", {City}".Trim(' ', ',');
             }
             if (string.IsNullOrWhiteSpace(Street))
             {
