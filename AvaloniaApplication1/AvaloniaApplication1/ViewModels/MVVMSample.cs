@@ -1,4 +1,7 @@
-﻿using AvaloniaApplication1.Models;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using AvaloniaApplication1.Models;
 using AvaloniaApplication1.Views;
 using ReactiveUI;
 using System;
@@ -75,7 +78,15 @@ namespace AvaloniaApplication1.ViewModels
         {
             //Employee.AddAddress(EditedAddress);
             var addressWindow = new AddressWindow();
-            addressWindow.Show();
+            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime deckstop)
+            {
+                if (deckstop.MainWindow is Window mainWindow)
+                {
+                    addressWindow.DataContext = new AddressViewModel(SelectedAddress);
+                    addressWindow.ShowDialog(mainWindow);
+                    
+                }
+            }
         }
 
 
