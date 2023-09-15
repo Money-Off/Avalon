@@ -10,29 +10,27 @@
 	<Design.DataContext>
 		<vm:AddressViewModel/>
 	</Design.DataContext>
-<Grid DataContext="{Binding Address}">
-	<StackPanel>
-	<Grid>
+<Grid DataContext="{Binding Address}" ShowGridLines="False" ColumnDefinitions="120, 500" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+	
 		<Label Grid.Row="1" Grid.Column="0" Margin="10">Страна</Label>
 		<TextBox Text="{Binding Country}"  Grid.Row="1" Grid.Column="1"></TextBox>
-	</Grid>
-	<Grid >
+	
+	
 		<Label Grid.Row="2" Grid.Column="0" Margin="10">Город</Label>
 		<TextBox Text="{Binding City}" Grid.Row="2" Grid.Column="1"></TextBox>
-	</Grid>
-	<Grid>
+	
+	
 		<Label Grid.Row="3" Grid.Column="0" Margin="10">Улица</Label>
 		<TextBox Text="{Binding Street}"  Grid.Row="3" Grid.Column="1"></TextBox>
-	</Grid>
-	<Grid>
+	
+	
 		<Label Grid.Row="4" Grid.Column="0" Margin="10">Дом</Label>
 		<TextBox Text="{Binding House}" Grid.Row="4" Grid.Column="1"></TextBox>
-	</Grid>
-	<Grid>
+	
+	
 		<Label Grid.Row="5" Grid.Column="0" Margin="10">Комната</Label>
 		<TextBox Text="{Binding Room}" Grid.Row="5" Grid.Column="1"></TextBox>
-	</Grid>
-	</StackPanel>
+	
 </Grid>
 
 </UserControl>

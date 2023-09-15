@@ -11,17 +11,21 @@
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
-	<Grid DataContext="{Binding MVVMSample}">
-		<TabControl>
-			<TabItem Header="ÔÈÎ">
-				<Grid ShowGridLines="False" ColumnDefinitions="120, 100" RowDefinitions="Auto,Auto,Auto" >
-					<Label Grid.Row="0" Grid.Column="0" Margin="10">FirstName</Label>
-					<TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" Margin="0 5" Name="firstName" ></TextBox>
-					<Label Grid.Row="1" Grid.Column="0" Margin="10">LastName</Label>
-					<TextBox Text="{Binding LastName}" Grid.Row="1" Grid.Column="1" Margin="0 5" Name="lastName"></TextBox>
-					<Label Grid.Row="2" Grid.Column="0" Margin="10">MiddleName</Label>
-					<TextBox Text="{Binding MiddleName}" Grid.Row="2" Grid.Column="1" Margin="0 5" Name="middleName"></TextBox>
-	
+
+	<Grid DataContext="{Binding MVVMSample}" >
+        <TabControl TabStripPlacement="Left">
+            <TabItem Header="ФИО">
+				
+				<Grid  DataContext="{Binding Employee}">
+                    <Grid ShowGridLines="False" ColumnDefinitions="120, 100" RowDefinitions="Auto,Auto,Auto" >
+                        <Label Grid.Row="0" Grid.Column="0" Margin="10">FirstName</Label>
+                        <TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" Margin="0 5" Name="firstName" ></TextBox>
+                        <Label Grid.Row="1" Grid.Column="0" Margin="10">LastName</Label>
+                        <TextBox Text="{Binding LastName}" Grid.Row="1" Grid.Column="1" Margin="0 5" Name="lastName"></TextBox>
+                        <Label Grid.Row="2" Grid.Column="0" Margin="10">MiddleName</Label>
+                        <TextBox Text="{Binding MiddleName}" Grid.Row="2" Grid.Column="1" Margin="0 5" Name="middleName"></TextBox>
+				    </Grid>
+
 				</Grid>
 			</TabItem>
 			<TabItem Header="ÐÐ´ÑÐµÑ">
