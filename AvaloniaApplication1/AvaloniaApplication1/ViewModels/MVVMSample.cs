@@ -25,7 +25,10 @@ namespace AvaloniaApplication1.ViewModels
 
         private Address _selectedAddress = null;
 
-        public Address SelectedAddress { get => _selectedAddress; set { _selectedAddress = value; OnPropertyChanged(nameof(SelectedAddress)); } }
+        private Address _editedAddress = new Address();
+
+        public Address SelectedAddress { get => _selectedAddress; set { _selectedAddress = value; OnPropertyChanged(nameof(SelectedAddress)); EditedAddress = value; } }
+        public Address EditedAddress { get => _editedAddress; set { _editedAddress = value; OnPropertyChanged(nameof(EditedAddress)); } }
 
         public ObservableCollection<Address> Addresses
         {
@@ -70,8 +73,9 @@ namespace AvaloniaApplication1.ViewModels
 
         private void OpenAddress()
         {
-            //var addressWindow = new AddressWindow();
-            //addressWindow.Show();
+            //Employee.AddAddress(EditedAddress);
+            var addressWindow = new AddressWindow();
+            addressWindow.Show();
         }
 
 

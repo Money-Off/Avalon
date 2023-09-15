@@ -8,5 +8,5 @@
         x:Class="AvaloniaApplication1.Views.AddressWindow"		
         Icon="/Assets/avalonia-logo.ico"
         Title="Address">
-	Welcome
+	    <views:AddressView/>
 </Window>
