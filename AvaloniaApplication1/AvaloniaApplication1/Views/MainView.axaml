@@ -11,6 +11,7 @@
          to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
+
 	<Grid DataContext="{Binding MVVMSample}" >
         <TabControl TabStripPlacement="Left">
             <TabItem Header="ФИО">
@@ -24,10 +25,10 @@
                         <Label Grid.Row="2" Grid.Column="0" Margin="10">MiddleName</Label>
                         <TextBox Text="{Binding MiddleName}" Grid.Row="2" Grid.Column="1" Margin="0 5" Name="middleName"></TextBox>
 				    </Grid>
+
 				</Grid>
-				
 			</TabItem>
-			<TabItem Header="Адрес">
+			<TabItem Header="ÐÐ´ÑÐµÑ">
 				<StackPanel>
 				<ListBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Addresses}" SelectedItem="{Binding SelectedAddress, Mode=TwoWay}">
 					<ListBox.ItemTemplate>
@@ -48,27 +49,14 @@
 				<Grid Grid.Row="1" Grid.Column="0" >
 					<Button Content="Add" Command="{Binding OpenAddressCommand}"/>
 				</Grid>
-				<Grid Grid.Row="2" Grid.Column="1">
-					<Button Content="Edit"/>
-				</Grid>
-				<Grid Grid.Row="3" Grid.Column="2" >
-					<Button Content="Delete"/>
-				</Grid>
-				</StackPanel>
 			</TabItem>
-            <TabItem Header="Итоговая строка">
-                <Grid DataContext="{Binding Employee}" ShowGridLines="False" ColumnDefinitions="200, 1000" RowDefinitions="Auto,Auto,Auto">
-                    <Label Grid.Row="0" Grid.Column="0" Margin="10">Итоговая строка</Label>
-                    <TextBox Text="{Binding ResultString, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Margin="0 5" IsReadOnly="True"></TextBox>
-					
-                </Grid>
-            </TabItem>
-			<TabItem>
-				<Grid DataContext="{Binding SelectedAddress}">
-					<TextBox Text="{Binding AddressString, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Margin="0 5" IsReadOnly="True"></TextBox>
+			<TabItem Header="Èòîãîâàÿ ñòðîêà">
+				<Grid ShowGridLines="False" ColumnDefinitions="200, 1000" RowDefinitions="Auto,Auto,Auto">
+					<Label Grid.Row="0" Grid.Column="0" Margin="10">Èòîãîâàÿ ñòðîêà</Label>
+					<TextBox Text="{Binding ResultString, Mode=OneWay}" Grid.Row="0" Grid.Column="1" Margin="0 5" IsReadOnly="True"></TextBox>
 				</Grid>
 			</TabItem>
-        </TabControl>
-    </Grid>
-    
+		</TabControl>
+	</Grid>
+	
 </UserControl>
