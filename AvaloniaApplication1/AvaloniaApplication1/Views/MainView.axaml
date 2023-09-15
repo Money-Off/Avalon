@@ -39,8 +39,11 @@
 						</DataTemplate>
 					</ListBox.ItemTemplate>
 				</ListBox>
+				
+					
+				
 				<Grid Grid.Row="1" Grid.Column="0" >
-					<Button Content="Add" Command="{Binding OpenAddress}"/>
+					<Button Content="Add" Command="{Binding OpenAddressCommand}"/>
 				</Grid>
 			</TabItem>
 			<TabItem Header="Èòîãîâàÿ ñòðîêà">

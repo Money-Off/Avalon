@@ -15,5 +15,6 @@ namespace AvaloniaApplication1.ViewModels
         {
             Address = address;
         }
+
     }
 }

@@ -20,9 +20,9 @@ namespace AvaloniaApplication1.Models
         private string _house = string.Empty;
         private string _room = string.Empty;
 
-        public string AddressString { get => GetFullAddress(); private set { _addressString = value; OnPropertyChanged(); } }
+        public string AddressString { get => GetFullAddress(); private set { _addressString = value; OnPropertyChanged();  } }
         public string City { get => _city; set { _city = value; OnPropertyChanged(); OnPropertyChanged(nameof(AddressString)); } }
-        public string Country { get => _country; set { _country = value; OnPropertyChanged(); OnPropertyChanged(nameof(AddressString)); } }
+        public string Country { get => _country; set { _country = value; OnPropertyChanged(); OnPropertyChanged(nameof(AddressString)); Console.WriteLine(value); } }
         public string Street { get => _street; set { _street = value; OnPropertyChanged(); OnPropertyChanged(nameof(AddressString)); } }
         public string House { get => _house; set { _house = value; OnPropertyChanged(); OnPropertyChanged(nameof(AddressString)); } }
         public string Room { get => _room; set { _room = value; OnPropertyChanged(); OnPropertyChanged(nameof(AddressString)); } }
