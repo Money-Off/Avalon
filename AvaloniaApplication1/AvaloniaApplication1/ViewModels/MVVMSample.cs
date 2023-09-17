@@ -8,11 +8,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Xml.Serialization;
 
 namespace AvaloniaApplication1.ViewModels
 {
@@ -26,10 +28,9 @@ namespace AvaloniaApplication1.ViewModels
         private Employee _employee = new Employee();
         private ObservableCollection<Address> _addresses = new ObservableCollection<Address>();
 
-        private Address _selectedAddress = null;
+        private Address _selectedAddress = new Address();
 
         private Address _editedAddress = new Address();
-
         public Address SelectedAddress { get => _selectedAddress; set { _selectedAddress = value; OnPropertyChanged(nameof(SelectedAddress)); EditedAddress = value; } }
         public Address EditedAddress { get => _editedAddress; set { _editedAddress = value; OnPropertyChanged(nameof(EditedAddress)); } }
 
@@ -54,7 +55,10 @@ namespace AvaloniaApplication1.ViewModels
         public MVVMSample()
         {
             Employee = new Employee();
+
             OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
+            CreateXMLCommand = ReactiveCommand.Create(CreateXML);
+
         }
 
         public MVVMSample(Employee employee, ObservableCollection<Address> addresses, Address selectedAddress)
@@ -63,12 +67,14 @@ namespace AvaloniaApplication1.ViewModels
             Addresses = addresses;
             SelectedAddress = selectedAddress;
             OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
+            CreateXMLCommand = ReactiveCommand.Create(CreateXML);
         }
 
         public MVVMSample(Employee employee)
         {
             Employee = employee;
             OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
+            CreateXMLCommand = ReactiveCommand.Create(CreateXML);
         }
 
 
@@ -82,12 +88,36 @@ namespace AvaloniaApplication1.ViewModels
             {
                 if (deckstop.MainWindow is Window mainWindow)
                 {
-                    addressWindow.DataContext = new AddressViewModel(SelectedAddress);
+                    var addressViewModel = new AddressViewModel(SelectedAddress);
+                    addressWindow.DataContext = addressViewModel;
                     addressWindow.ShowDialog(mainWindow);
+                    if (addressViewModel.ResultAddress is Address resultAddress)
+                    {
+                        Employee.AddAddress(resultAddress);
+                    }
                     
                 }
             }
         }
+
+
+        public ICommand CreateXMLCommand { get; }
+
+        private void CreateXML()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Employee));
+
+            using (FileStream fs = new FileStream("employer.xml", FileMode.OpenOrCreate))
+            {
+                serializer.Serialize(fs, Employee);
+               
+            }
+            using (StreamReader reader = new StreamReader("employer.xml"))
+            {
+                var a = reader.ReadToEnd();
+            }
+        }
+        
 
 
         //public event PropertyChangedEventHandler? PropertyChanged;

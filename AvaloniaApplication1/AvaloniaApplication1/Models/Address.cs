@@ -7,9 +7,11 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace AvaloniaApplication1.Models
 {
+    [Serializable]
     public class Address : BaseClass
     {
         private string _addressString = string.Empty;
@@ -20,6 +22,7 @@ namespace AvaloniaApplication1.Models
         private string _house = string.Empty;
         private string _room = string.Empty;
 
+        [XmlIgnore]
         public string AddressString { get => GetFullAddress(); private set { _addressString = value; OnPropertyChanged();  } }
         public string City { get => _city; set { _city = value; OnPropertyChanged(); OnPropertyChanged(nameof(AddressString)); } }
         public string Country { get => _country; set { _country = value; OnPropertyChanged(); OnPropertyChanged(nameof(AddressString)); Console.WriteLine(value); } }

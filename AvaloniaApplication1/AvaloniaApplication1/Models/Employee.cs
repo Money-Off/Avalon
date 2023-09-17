@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace AvaloniaApplication1.Models
 {
+    [Serializable]
     public class Employee : BaseClass
     {
         private Guid _id;
