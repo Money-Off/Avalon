@@ -3,6 +3,7 @@ using AvaloniaApplication1.Views;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ReactiveUI;
 using System.Collections.Generic;
+using System.Reactive.Linq;
 using System.Windows.Input;
 
 namespace AvaloniaApplication1.ViewModels;
@@ -23,8 +24,15 @@ public class MainViewModel : ViewModelBase
         addressWindow.Show();
     }
 
-    public MainViewModel()
-    {
-        OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
-    }
+    //public MainViewModel()
+    //{
+    //    ShowDialog = new Interaction<MVVMSample, AddressViewModel?>();
+    //    OpenAddressCommand = ReactiveCommand.CreateFromTask(async () =>
+    //    {
+    //        var newMVVM = new MVVMSample();
+    //        var result = await ShowDialog.Handle(newMVVM)
+    //        });
+    //    OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
+    //}
+    //public Interaction<MVVMSample, AddressViewModel?> ShowDialog { get; }
 }

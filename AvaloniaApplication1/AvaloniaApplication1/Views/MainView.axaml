@@ -45,6 +45,8 @@
 				
 					
 					<Button Grid.Row="1" Grid.Column="0" Content="Add" Command="{Binding OpenAddressCommand}"/>
+					<Button Grid.Row="2" Grid.Column="2" Content="CreateXML" Command="{Binding CreateXMLCommand}"/>
+					
 				</Grid>
 				
 			</TabItem>
