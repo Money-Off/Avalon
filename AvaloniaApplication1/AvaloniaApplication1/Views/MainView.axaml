@@ -16,7 +16,7 @@
             <TabItem Header="ФИО">
 				
 				<Grid  DataContext="{Binding Employee}">
-                    <Grid ShowGridLines="False" ColumnDefinitions="120, 100" RowDefinitions="Auto,Auto,Auto" >
+                    <Grid ShowGridLines="False" ColumnDefinitions="120, 100,100" RowDefinitions="Auto,Auto,Auto,Auto" >
                         <Label Grid.Row="0" Grid.Column="0" Margin="10">FirstName</Label>
                         <TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" Margin="0 5" Name="firstName" ></TextBox>
                         <Label Grid.Row="1" Grid.Column="0" Margin="10">LastName</Label>
@@ -28,7 +28,7 @@
 				
 			</TabItem>
 			<TabItem Header="Адреса">
-				<Grid ShowGridLines="False" ColumnDefinitions="200, 1000" RowDefinitions="Auto,Auto,Auto">
+				<Grid ShowGridLines="False" ColumnDefinitions="200, 100, 100" RowDefinitions="Auto,Auto,Auto,Auto">
 					<ListBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Addresses}" SelectedItem="{Binding SelectedAddress, Mode=TwoWay}">
 						<ListBox.ItemTemplate>
 							<DataTemplate>
@@ -41,10 +41,16 @@
 							</DataTemplate>
 						</ListBox.ItemTemplate>
 					</ListBox>
-				
-					
-					<Button Grid.Row="1" Grid.Column="0" Content="Add" Command="{Binding OpenAddressCommand}"/>
-					<Button Grid.Row="2" Grid.Column="2" Content="CreateXML" Command="{Binding CreateXMLCommand}"/>
+
+					<Grid  Grid.Row="1" Grid.Column="0">
+						<Button Content="Add" Command="{Binding OpenAddressCommand}"/>
+					</Grid>
+					<Grid Grid.Row="2" Grid.Column="2">
+					<Button  Content="CreateXML" Command="{Binding CreateXMLCommand}"/>
+					</Grid>
+					<Grid  Grid.Row="2" Grid.Column="0" >
+					<Button Content="DownloadXML" Command="{Binding ReadXMLCommand}"/>
+					</Grid>
 					
 				</Grid>
 				

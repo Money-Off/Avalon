@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform.Storage;
 using AvaloniaApplication1.Models;
 using AvaloniaApplication1.Views;
 using ReactiveUI;
@@ -58,6 +59,7 @@ namespace AvaloniaApplication1.ViewModels
 
             OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
             CreateXMLCommand = ReactiveCommand.Create(CreateXML);
+            ReadXMLCommand = ReactiveCommand.Create(ReadXML);
 
         }
 
@@ -68,6 +70,7 @@ namespace AvaloniaApplication1.ViewModels
             SelectedAddress = selectedAddress;
             OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
             CreateXMLCommand = ReactiveCommand.Create(CreateXML);
+            ReadXMLCommand = ReactiveCommand.Create(ReadXML);
         }
 
         public MVVMSample(Employee employee)
@@ -75,6 +78,7 @@ namespace AvaloniaApplication1.ViewModels
             Employee = employee;
             OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
             CreateXMLCommand = ReactiveCommand.Create(CreateXML);
+            ReadXMLCommand = ReactiveCommand.Create(ReadXML);
         }
 
 
@@ -117,8 +121,42 @@ namespace AvaloniaApplication1.ViewModels
                 var a = reader.ReadToEnd();
             }
         }
-        
 
+        public ICommand ReadXMLCommand { get; }
+
+        private async void ReadXML()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Employee));
+            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime deckstop)
+            {
+                if (deckstop.MainWindow is Window mainWindow)
+                {
+                    var topLevel = TopLevel.GetTopLevel(mainWindow);
+
+                    var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+                    {
+                        Title = "Выберете файл",
+                        AllowMultiple = false
+                    });
+
+                    if(files.Count>=1)
+                    {
+                        using (FileStream fs = new FileStream(files[0].Name, FileMode.OpenOrCreate))
+                        {
+                            //    await using var stream = await files[0].OpenReadAsync();
+                            //using var streamReader = new StreamReader(stream);
+                            //var fileContent = await streamReader.ReadToEndAsync();
+                            Employee? employeeFromXML = serializer.Deserialize(fs) as Employee;
+
+                            if (employeeFromXML != null)
+                            {
+                                Employee = employeeFromXML;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         //public event PropertyChangedEventHandler? PropertyChanged;
 
