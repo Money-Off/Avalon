@@ -10,8 +10,9 @@
 	<Design.DataContext>
 		<vm:AddressViewModel/>
 	</Design.DataContext>
-	<Grid>
-		<Grid DataContext="{Binding Address}" ShowGridLines="False" ColumnDefinitions="120, 500" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+	<Grid ColumnDefinitions="Auto,Auto,Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+		<Grid DataContext="{Binding ResultAddress}" ShowGridLines="False" ColumnDefinitions="120, 500" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+			  Grid.Row="0" Grid.Column="0">
 	
 		<Label Grid.Row="1" Grid.Column="0" Margin="10">Страна</Label>
 		<TextBox Text="{Binding Country}"  Grid.Row="1" Grid.Column="1"></TextBox>
@@ -35,8 +36,13 @@
 		
 	
 		</Grid>
-		<Grid>
-			<Button Content="OK" Command="{Binding ConfirmAddressCommand}"/>
+		<Grid Grid.Row="1" Grid.Column="0" RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,Auto,Auto">
+			<Grid Grid.Row="0" Grid.Column="0">
+				<Button Content="OK" Command="{Binding ConfirmAddressCommand}"/>
+			</Grid>
+			<Grid Grid.Row="0" Grid.Column="1">
+				<Button Content="Отмена" Command="{Binding CancelAddressCommand}"/>
+			</Grid>
 		</Grid>
 	</Grid>
 </UserControl>

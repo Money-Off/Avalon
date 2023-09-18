@@ -16,36 +16,48 @@ namespace AvaloniaApplication1.ViewModels
     public class AddressViewModel : ViewModelBase
     {
         public Address Address { get; set; }
-        //public Address? ResultAddress { get; set; } = null;
+        public Address ResultAddress { get; set; }
 
         public Employee Employee { get; set; }
 
         public AddressViewModel(Address address, Employee employee)
         {
             Address = address;
+            ResultAddress = new Address(Address);
+
             Employee = employee;
             ConfirmAddressCommand = ReactiveCommand.Create(ConfirmAddress);
+            CancelAddressCommand = ReactiveCommand.Create(CancelAddress);
         }
 
         public ICommand ConfirmAddressCommand { get; }
 
         private void ConfirmAddress()
         {
-            //Employee.AddAddress(EditedAddress);
-            //ResultAddress = Address;
+            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime deckstop)
+            {
+
+                if (deckstop.Windows.FirstOrDefault(o => o.DataContext is AddressViewModel) is Window addressWindow)
+                {
+                    var id = Address.ID;
+                    if (Employee.Addresses.FirstOrDefault(o => o.ID == id) is Address addressExisted)
+                    {
+                        Employee.DeleteAddress(addressExisted);
+                    }                    
+                        Employee.AddAddress(ResultAddress);
+                    addressWindow.Close();
+                }
+            }
+        }
+
+        public ICommand CancelAddressCommand { get; }
+
+        private void CancelAddress()
+        {
             if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime deckstop)
             {
                 if (deckstop.Windows.FirstOrDefault(o => o.DataContext is AddressViewModel) is Window addressWindow)
                 {
-                    var id = Address.ID;
-                    if(Employee.Addresses.FirstOrDefault(o=>o.ID == id) is Address addressExisted)
-                    {
-                        addressExisted = Address;
-                    }
-                    else
-                    {
-                        Employee.AddAddress(Address);
-                    }
                     addressWindow.Close();
                 }
             }

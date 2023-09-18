@@ -58,6 +58,17 @@ namespace AvaloniaApplication1.Models
             AddressString = GetFullAddress();
 
         }
+        public Address(Address address)
+        {
+            Country = address.Country;
+            City = address.City;
+            Street = address.Street;
+            House = address.House;
+            Room = address.Room;
+            ID = address.ID;
+            AddressString = GetFullAddress();
+
+        }
 
 
         private string GetFullAddress()
@@ -70,19 +81,19 @@ namespace AvaloniaApplication1.Models
             }
             if (!string.IsNullOrWhiteSpace(City))
             {
-                fullAddress += $", {City}".Trim(' ',',');
+                fullAddress += $", {City}";//.TrimStart(' ',',');
             }
-            if (string.IsNullOrWhiteSpace(Street))
+            if (!string.IsNullOrWhiteSpace(Street))
             {
-                fullAddress += $", {Street}".Trim(' ', ',');
+                fullAddress += $", {Street}";//.TrimStart(' ', ',');
             }
-            if (string.IsNullOrWhiteSpace(House))
+            if (!string.IsNullOrWhiteSpace(House))
             {
-                fullAddress += $", {House}".Trim(' ', ',');
+                fullAddress += $", {House}";//.TrimStart(' ', ',');
             }
-            if (string.IsNullOrWhiteSpace(Room))
+            if (!string.IsNullOrWhiteSpace(Room))
             {
-                fullAddress += $", {Room}".Trim(' ', ',');
+                fullAddress += $", {Room}";//.TrimStart(' ', ',');
             }
 
             return fullAddress;

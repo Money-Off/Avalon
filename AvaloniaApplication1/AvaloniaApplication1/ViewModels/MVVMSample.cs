@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reactive;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,7 +58,7 @@ namespace AvaloniaApplication1.ViewModels
         {
             Employee = new Employee();
 
-            OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
+            OpenAddressCommand = ReactiveCommand.Create<bool>(OpenAddress);
             CreateXMLCommand = ReactiveCommand.Create(CreateXML);
             ReadXMLCommand = ReactiveCommand.Create(ReadXML);
             DeleteAddressCommand = ReactiveCommand.Create(DeleteAddress);
@@ -69,7 +70,7 @@ namespace AvaloniaApplication1.ViewModels
             Employee = employee;
             Addresses = addresses;
             SelectedAddress = selectedAddress;
-            OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
+            OpenAddressCommand = ReactiveCommand.Create<bool>(OpenAddress);
             CreateXMLCommand = ReactiveCommand.Create(CreateXML);
             ReadXMLCommand = ReactiveCommand.Create(ReadXML);
             DeleteAddressCommand = ReactiveCommand.Create(DeleteAddress);
@@ -78,7 +79,7 @@ namespace AvaloniaApplication1.ViewModels
         public MVVMSample(Employee employee)
         {
             Employee = employee;
-            OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
+            OpenAddressCommand = ReactiveCommand.Create<bool>(OpenAddress);
             CreateXMLCommand = ReactiveCommand.Create(CreateXML);
             ReadXMLCommand = ReactiveCommand.Create(ReadXML);
             DeleteAddressCommand = ReactiveCommand.Create(DeleteAddress);
@@ -86,9 +87,9 @@ namespace AvaloniaApplication1.ViewModels
 
        
 
-        public ICommand OpenAddressCommand { get; }
+        public ReactiveCommand<bool,Unit> OpenAddressCommand { get; }
 
-        private void OpenAddress()
+        private void OpenAddress(bool IsSelected = true)
         {
             //Employee.AddAddress(EditedAddress);
             var addressWindow = new AddressWindow();
@@ -96,7 +97,12 @@ namespace AvaloniaApplication1.ViewModels
             {
                 if (deckstop.MainWindow is Window mainWindow)
                 {
-                    var addressViewModel = new AddressViewModel(SelectedAddress, Employee);
+                    var selectedAddress = new Address();
+                    if(IsSelected)
+                    {
+                        selectedAddress = SelectedAddress;
+                    }
+                    var addressViewModel = new AddressViewModel(selectedAddress, Employee);
                     addressWindow.DataContext = addressViewModel;
                     addressWindow.ShowDialog(mainWindow);
                     
@@ -124,10 +130,6 @@ namespace AvaloniaApplication1.ViewModels
             {
                 serializer.Serialize(fs, Employee);
                
-            }
-            using (StreamReader reader = new StreamReader("employer.xml"))
-            {
-                var a = reader.ReadToEnd();
             }
         }
 
