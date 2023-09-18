@@ -15,12 +15,15 @@ namespace AvaloniaApplication1.ViewModels
 {
     public class AddressViewModel : ViewModelBase
     {
-        public Address Address { get; set; } = null;
-        public Address ResultAddress { get; set; } = null;
+        public Address Address { get; set; }
+        //public Address? ResultAddress { get; set; } = null;
 
-        public AddressViewModel(Address address)
+        public Employee Employee { get; set; }
+
+        public AddressViewModel(Address address, Employee employee)
         {
             Address = address;
+            Employee = employee;
             ConfirmAddressCommand = ReactiveCommand.Create(ConfirmAddress);
         }
 
@@ -29,12 +32,20 @@ namespace AvaloniaApplication1.ViewModels
         private void ConfirmAddress()
         {
             //Employee.AddAddress(EditedAddress);
-            ResultAddress = Address;
+            //ResultAddress = Address;
             if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime deckstop)
             {
                 if (deckstop.Windows.FirstOrDefault(o => o.DataContext is AddressViewModel) is Window addressWindow)
                 {
-                    
+                    var id = Address.ID;
+                    if(Employee.Addresses.FirstOrDefault(o=>o.ID == id) is Address addressExisted)
+                    {
+                        addressExisted = Address;
+                    }
+                    else
+                    {
+                        Employee.AddAddress(Address);
+                    }
                     addressWindow.Close();
                 }
             }

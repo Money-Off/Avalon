@@ -45,6 +45,9 @@
 					<Grid  Grid.Row="1" Grid.Column="0">
 						<Button Content="Add" Command="{Binding OpenAddressCommand}"/>
 					</Grid>
+					<Grid  Grid.Row="1" Grid.Column="1">
+						<Button Content="Delete" Command="{Binding DeleteAddressCommand}"/>
+					</Grid>
 					<Grid Grid.Row="2" Grid.Column="2">
 					<Button  Content="CreateXML" Command="{Binding CreateXMLCommand}"/>
 					</Grid>

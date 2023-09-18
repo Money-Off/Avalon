@@ -67,5 +67,13 @@ namespace AvaloniaApplication1.Models
             Addresses = addresses;
             OnPropertyChanged();
         }
+
+        public void DeleteAddress(Address address)
+        {
+            var addresses = Addresses;
+            addresses.Remove(address);
+            Addresses = addresses;
+            OnPropertyChanged();
+        }
     }
 }

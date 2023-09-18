@@ -29,11 +29,11 @@ namespace AvaloniaApplication1.ViewModels
         private Employee _employee = new Employee();
         private ObservableCollection<Address> _addresses = new ObservableCollection<Address>();
 
-        private Address _selectedAddress = new Address();
+        private Address? _selectedAddress = new Address();
 
-        private Address _editedAddress = new Address();
-        public Address SelectedAddress { get => _selectedAddress; set { _selectedAddress = value; OnPropertyChanged(nameof(SelectedAddress)); EditedAddress = value; } }
-        public Address EditedAddress { get => _editedAddress; set { _editedAddress = value; OnPropertyChanged(nameof(EditedAddress)); } }
+        private Address? _editedAddress = new Address();
+        public Address? SelectedAddress { get => _selectedAddress; set { _selectedAddress = value; OnPropertyChanged(nameof(SelectedAddress)); EditedAddress = value; } }
+        public Address? EditedAddress { get => _editedAddress; set { _editedAddress = value; OnPropertyChanged(nameof(EditedAddress)); } }
 
         public ObservableCollection<Address> Addresses
         {
@@ -60,6 +60,7 @@ namespace AvaloniaApplication1.ViewModels
             OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
             CreateXMLCommand = ReactiveCommand.Create(CreateXML);
             ReadXMLCommand = ReactiveCommand.Create(ReadXML);
+            DeleteAddressCommand = ReactiveCommand.Create(DeleteAddress);
 
         }
 
@@ -71,6 +72,7 @@ namespace AvaloniaApplication1.ViewModels
             OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
             CreateXMLCommand = ReactiveCommand.Create(CreateXML);
             ReadXMLCommand = ReactiveCommand.Create(ReadXML);
+            DeleteAddressCommand = ReactiveCommand.Create(DeleteAddress);
         }
 
         public MVVMSample(Employee employee)
@@ -79,8 +81,10 @@ namespace AvaloniaApplication1.ViewModels
             OpenAddressCommand = ReactiveCommand.Create(OpenAddress);
             CreateXMLCommand = ReactiveCommand.Create(CreateXML);
             ReadXMLCommand = ReactiveCommand.Create(ReadXML);
+            DeleteAddressCommand = ReactiveCommand.Create(DeleteAddress);
         }
 
+       
 
         public ICommand OpenAddressCommand { get; }
 
@@ -92,18 +96,23 @@ namespace AvaloniaApplication1.ViewModels
             {
                 if (deckstop.MainWindow is Window mainWindow)
                 {
-                    var addressViewModel = new AddressViewModel(SelectedAddress);
+                    var addressViewModel = new AddressViewModel(SelectedAddress, Employee);
                     addressWindow.DataContext = addressViewModel;
                     addressWindow.ShowDialog(mainWindow);
-                    if (addressViewModel.ResultAddress is Address resultAddress)
-                    {
-                        Employee.AddAddress(resultAddress);
-                    }
+                    
                     
                 }
             }
         }
+        public ICommand DeleteAddressCommand { get; }
 
+        private void DeleteAddress()
+        {
+            if(SelectedAddress != null)
+            {
+                Employee.DeleteAddress(SelectedAddress);
+            }
+        }
 
         public ICommand CreateXMLCommand { get; }
 
