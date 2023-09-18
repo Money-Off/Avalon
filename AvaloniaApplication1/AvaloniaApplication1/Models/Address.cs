@@ -82,18 +82,22 @@ namespace AvaloniaApplication1.Models
             if (!string.IsNullOrWhiteSpace(City))
             {
                 fullAddress += $", {City}";//.TrimStart(' ',',');
+                fullAddress = fullAddress.TrimStart(' ', ',');
             }
             if (!string.IsNullOrWhiteSpace(Street))
             {
                 fullAddress += $", {Street}";//.TrimStart(' ', ',');
+                fullAddress = fullAddress.TrimStart(' ', ',');
             }
             if (!string.IsNullOrWhiteSpace(House))
             {
                 fullAddress += $", {House}";//.TrimStart(' ', ',');
+                fullAddress = fullAddress.TrimStart(' ', ',');
             }
             if (!string.IsNullOrWhiteSpace(Room))
             {
                 fullAddress += $", {Room}";//.TrimStart(' ', ',');
+                fullAddress = fullAddress.TrimStart(' ', ',');
             }
 
             return fullAddress;
