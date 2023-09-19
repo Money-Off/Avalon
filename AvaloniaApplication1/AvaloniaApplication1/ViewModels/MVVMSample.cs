@@ -52,7 +52,7 @@ namespace AvaloniaApplication1.ViewModels
 
 
 
-        public Employee Employee { get => _employee; set { _employee = value; OnPropertyChanged(nameof(Employee)); OnPropertyChanged(nameof(Addresses))}; }
+        public Employee Employee { get => _employee; set { _employee = value; OnPropertyChanged(nameof(Employee)); OnPropertyChanged(nameof(Addresses)); } }
 
         public MVVMSample()
         {
