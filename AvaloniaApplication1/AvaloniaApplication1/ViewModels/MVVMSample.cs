@@ -30,11 +30,12 @@ namespace AvaloniaApplication1.ViewModels
         private Employee _employee = new Employee();
         private ObservableCollection<Address> _addresses = new ObservableCollection<Address>();
 
-        private Address? _selectedAddress = new Address();
+        private Address? _selectedAddress = null;
 
-        private Address? _editedAddress = new Address();
-        public Address? SelectedAddress { get => _selectedAddress; set { _selectedAddress = value; OnPropertyChanged(nameof(SelectedAddress)); EditedAddress = value; } }
+        private Address? _editedAddress = null;
+        public Address? SelectedAddress { get => _selectedAddress; set { _selectedAddress = value; OnPropertyChanged(nameof(SelectedAddress)); OnPropertyChanged(nameof(IsAddressSelected)); EditedAddress = value; } }
         public Address? EditedAddress { get => _editedAddress; set { _editedAddress = value; OnPropertyChanged(nameof(EditedAddress)); } }
+        public bool IsAddressSelected { get => SelectedAddress is Address; }
 
         public ObservableCollection<Address> Addresses
         {
@@ -118,6 +119,7 @@ namespace AvaloniaApplication1.ViewModels
             {
                 Employee.DeleteAddress(SelectedAddress);
             }
+            SelectedAddress = null;
         }
 
         public ICommand CreateXMLCommand { get; }
