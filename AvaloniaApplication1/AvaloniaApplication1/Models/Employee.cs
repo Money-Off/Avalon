@@ -56,7 +56,6 @@ namespace AvaloniaApplication1.Models
         }
         public Employee() 
         { 
-            _addresses = new ObservableCollection<Address>() { new Address("HH","drgdg","drgyydry","drgdgdrg",""),new Address("dfgdg","dfgdg","dfgdg","dfgdg","dfgdg")};
             _id = Guid.NewGuid();
         }
 

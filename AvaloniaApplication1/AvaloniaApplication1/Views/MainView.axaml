@@ -52,14 +52,14 @@
 						
 					</Grid>
 					<Grid  Grid.Row="1" Grid.Column="1">
-						<Button Content="Edit" Command="{Binding OpenAddressCommand}">
+						<Button Content="Edit" Command="{Binding OpenAddressCommand}" IsEnabled="{Binding IsAddressSelected}">
 							<Button.CommandParameter>
 								<sys:Boolean>true</sys:Boolean>
 							</Button.CommandParameter>
 						</Button>
 					</Grid>
 					<Grid  Grid.Row="1" Grid.Column="2">
-						<Button Content="Delete" Command="{Binding DeleteAddressCommand}"/>
+						<Button Content="Delete" Command="{Binding DeleteAddressCommand}" IsEnabled="{Binding IsAddressSelected}"/>
 					</Grid>
 					<Grid Grid.Row="2" Grid.Column="2">
 						<Button  Content="CreateXML" Command="{Binding CreateXMLCommand}"/>
