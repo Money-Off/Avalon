@@ -30,7 +30,7 @@
 			</TabItem>
 			<TabItem Header="Адреса">
 				<Grid ShowGridLines="False" ColumnDefinitions="200, 100, 100" RowDefinitions="Auto,Auto,Auto,Auto">
-					<ListBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Addresses}" SelectedItem="{Binding SelectedAddress, Mode=TwoWay}">
+					<ListBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource="{Binding Addresses}" SelectedItem="{Binding SelectedAddress, Mode=TwoWay}" MinHeight="400">
 						<ListBox.ItemTemplate>
 							<DataTemplate>
 								<StackPanel Orientation="Horizontal">
