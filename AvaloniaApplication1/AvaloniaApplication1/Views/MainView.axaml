@@ -15,9 +15,9 @@
 	<Grid DataContext="{Binding MVVMSample}">
 		<TabControl TabStripPlacement="Left">
 			<TabItem Header="ФИО">
-
+				<StackPanel>
 				<Grid  DataContext="{Binding Employee}">
-					<Grid ShowGridLines="False" ColumnDefinitions="120, 100,100" RowDefinitions="Auto,Auto,Auto,Auto" >
+					<Grid ShowGridLines="False" ColumnDefinitions="120, 100,100" RowDefinitions="Auto,Auto,Auto,Auto,Auto" >
 						<Label Grid.Row="0" Grid.Column="0" Margin="10">FirstName</Label>
 						<TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" Margin="0 5" Name="firstName" ></TextBox>
 						<Label Grid.Row="1" Grid.Column="0" Margin="10">LastName</Label>
@@ -26,7 +26,23 @@
 						<TextBox Text="{Binding MiddleName}" Grid.Row="2" Grid.Column="1" Margin="0 5" Name="middleName"></TextBox>
 					</Grid>
 				</Grid>
-
+				<Grid ColumnDefinitions="120, 200,200" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+					<Label Grid.Row="3" Grid.Column="0" Margin="10">Sex</Label>
+					<ComboBox ItemsSource="{Binding Path=Sexes}"
+								SelectedValue="{Binding Path=SelectedSex}" 
+								Grid.Row="3" Grid.Column="1" Margin="0 5" Name="sex"/>
+				</Grid>
+				<Grid  DataContext="{Binding Employee}">
+					<Grid ShowGridLines="False" ColumnDefinitions="120, 100,100" RowDefinitions="Auto,Auto,Auto,Auto,Auto" >
+						<Label Grid.Row="0" Grid.Column="0" Margin="10">INN</Label>
+						<TextBox Text="{Binding INN}" Grid.Row="0" Grid.Column="1" Margin="0 5" Name="inn" ></TextBox>
+						<Label Grid.Row="1" Grid.Column="0" Margin="10">SNILS</Label>
+						<TextBox Text="{Binding Snils}" Grid.Row="1" Grid.Column="1" Margin="0 5" Name="snils"></TextBox>
+						<Label Grid.Row="2" Grid.Column="0" Margin="10">E-MAIL</Label>
+						<TextBox Text="{Binding Email}" Grid.Row="2" Grid.Column="1" Margin="0 5" Name="email"></TextBox>
+					</Grid>
+				</Grid>
+				</StackPanel>
 			</TabItem>
 			<TabItem Header="Адреса">
 				<Grid ShowGridLines="False" ColumnDefinitions="200, 100, 100" RowDefinitions="Auto,Auto,Auto,Auto">

@@ -14,6 +14,10 @@ namespace AvaloniaApplication1.Models
         private string _lastName = string.Empty;
         private string _firstName = string.Empty;
         private string _middleName = string.Empty;
+        private string _sex = "мужской";
+        private string _inn = string.Empty;
+        private string _snils = string.Empty;
+        private string _email = string.Empty;
 
         private ObservableCollection<Address> _addresses = new ObservableCollection<Address>();
 
@@ -21,8 +25,14 @@ namespace AvaloniaApplication1.Models
         public string FirstName { get => _firstName; set { _firstName = value; OnPropertyChanged(nameof(FirstName)); OnPropertyChanged(nameof(ResultString)); } }
         public string LastName { get => _lastName; set { _lastName = value; OnPropertyChanged(nameof(LastName)); OnPropertyChanged(nameof(ResultString)); } }
         public string MiddleName { get => _middleName; set { _middleName = value; OnPropertyChanged(nameof(MiddleName)); OnPropertyChanged(nameof(ResultString)); } }
+        public string Sex { get => _sex; set { _sex = value; OnPropertyChanged(nameof(Sex)); } }
+        public string INN { get => _inn; set { _inn = value; OnPropertyChanged(nameof(INN)); } }
+        public string Snils { get => _snils; set { _snils = value; OnPropertyChanged(nameof(Snils)); } }
+        public string Email { get => _email; set { _email = value; OnPropertyChanged(nameof(Email)); } }
+        
         public ObservableCollection<Address> Addresses { get => _addresses; set { _addresses = value; OnPropertyChanged(nameof(Addresses)); OnPropertyChanged(nameof(ResultString)); } }
 
+        
         public string ResultString
         {
             get
