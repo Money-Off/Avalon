@@ -30,12 +30,15 @@ namespace AvaloniaApplication1.ViewModels
         private Employee _employee = new Employee();
         private ObservableCollection<Address> _addresses = new ObservableCollection<Address>();
 
+        private ObservableCollection<string> _sexes = new ObservableCollection<string>() { "мужской","женский"};
+
         private Address? _selectedAddress = null;
 
         private Address? _editedAddress = null;
         public Address? SelectedAddress { get => _selectedAddress; set { _selectedAddress = value; OnPropertyChanged(nameof(SelectedAddress)); OnPropertyChanged(nameof(IsAddressSelected)); EditedAddress = value; } }
         public Address? EditedAddress { get => _editedAddress; set { _editedAddress = value; OnPropertyChanged(nameof(EditedAddress)); } }
         public bool IsAddressSelected { get => SelectedAddress is Address; }
+        public string SelectedSex { get => Employee.Sex; set { Employee.Sex = value; OnPropertyChanged(nameof(SelectedSex)); } }
 
         public ObservableCollection<Address> Addresses
         {
@@ -50,10 +53,21 @@ namespace AvaloniaApplication1.ViewModels
                 OnPropertyChanged(nameof(Employee));
             }
         }
+        public ObservableCollection<string> Sexes
+        {
+            get
+            {
+                return _sexes;
+            }
+            set
+            {                    
+                _sexes = value;
+            }
+        }
 
 
 
-        public Employee Employee { get => _employee; set { _employee = value; OnPropertyChanged(nameof(Employee)); OnPropertyChanged(nameof(Addresses)); } }
+        public Employee Employee { get => _employee; set { _employee = value; OnPropertyChanged(nameof(Employee)); OnPropertyChanged(nameof(Addresses));OnPropertyChanged(nameof(SelectedSex)); } }
 
         public MVVMSample()
         {
