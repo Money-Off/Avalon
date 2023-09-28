@@ -7,9 +7,6 @@
              x:Class="AvaloniaApplication1.Views.AddressView"			 
              x:DataType="vm:AddressViewModel">
 	
-	<Design.DataContext>
-		<vm:AddressViewModel/>
-	</Design.DataContext>
 	<Grid ColumnDefinitions="Auto,Auto,Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
 		<Grid DataContext="{Binding ResultAddress}" ShowGridLines="False" ColumnDefinitions="120, 500" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
 			  Grid.Row="0" Grid.Column="0">

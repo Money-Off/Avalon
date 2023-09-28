@@ -87,6 +87,63 @@
 				</Grid>
 
 			</TabItem>
+			<TabItem Header="Телефоны">
+				<Grid ShowGridLines="False" ColumnDefinitions="200, 100, 100" RowDefinitions="Auto,Auto,Auto,Auto">
+					<ListBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" ItemsSource = "{Binding Phones}" SelectedItem="{Binding SelectedPhone, Mode=TwoWay}" MinHeight="400">
+						<ListBox.ItemTemplate>
+							<DataTemplate>									
+								<StackPanel Orientation="Horizontal">
+									<TextBlock Text="{Binding ID}" Padding="0" Height="0" />
+									<Border BorderThickness="1" BorderBrush="Black">
+										<TextBlock Text="{Binding PhoneSring, Mode=OneWay}" Padding="7" />
+									</Border>
+								</StackPanel>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+
+					<Grid  Grid.Row="1" Grid.Column="0">
+						<Button Content="Add" Command="{Binding OpenPhoneCommand}">
+							<Button.CommandParameter>
+								<sys:Boolean>false</sys:Boolean>
+							</Button.CommandParameter>
+						</Button>
+						
+					</Grid>
+					<Grid  Grid.Row="1" Grid.Column="1">
+						<Button Content="Edit" Command="{Binding OpenPhoneCommand}" IsEnabled="{Binding IsPhoneSelected}">
+							<Button.CommandParameter>
+								<sys:Boolean>true</sys:Boolean>
+							</Button.CommandParameter>
+						</Button>
+					</Grid>
+					<Grid  Grid.Row="1" Grid.Column="2">
+						<Button Content="Delete" Command="{Binding DeletePhoneCommand}" IsEnabled="{Binding IsPhoneSelected}"/>
+					</Grid>
+
+				</Grid>
+
+			</TabItem>
+			<TabItem Header="Информация о рождении">				
+				<StackPanel>
+					<Grid DataContext="{Binding Employee}">
+						<Grid DataContext="{Binding BirthInfoAttr}" >
+
+							<Grid ShowGridLines="False" ColumnDefinitions="120, 1000,100" RowDefinitions="Auto,Auto,Auto,Auto,Auto" >
+								<Label Grid.Row="0" Grid.Column="0" Margin="10">Страна</Label>
+								<TextBox Text="{Binding Country}" Grid.Row="0" Grid.Column="1" Margin="0 5" Name="country" ></TextBox>
+								<Label Grid.Row="1" Grid.Column="0" Margin="10">Регион</Label>
+								<TextBox Text="{Binding Region}" Grid.Row="1" Grid.Column="1" Margin="0 5" Name="region"></TextBox>
+								<Label Grid.Row="2" Grid.Column="0" Margin="10">Город</Label>
+								<TextBox Text="{Binding City}" Grid.Row="2" Grid.Column="1" Margin="0 5" Name="city"></TextBox>
+								<Label Grid.Row="3" Grid.Column="0" Margin="10">Дата рождения</Label>
+								<DatePicker DataContext="{Binding BirthDate}" Grid.Row="3" Grid.Column="1" Margin="0 5" Name="birthDate"></DatePicker>
+								
+							</Grid>
+						</Grid>
+					</Grid>
+				</StackPanel>		
+			</TabItem>
 			<TabItem Header="Итоговая строка">
 				<Grid ShowGridLines="False" ColumnDefinitions="200, 1000" RowDefinitions="Auto,Auto,Auto" DataContext="{Binding Employee}">
 					<Label Grid.Row="0" Grid.Column="0" Margin="10">Итоговая строка</Label>

@@ -19,7 +19,10 @@ namespace AvaloniaApplication1.Models
         private string _snils = string.Empty;
         private string _email = string.Empty;
 
+        private BirthInfo _birthInfo = new BirthInfo();
+
         private ObservableCollection<Address> _addresses = new ObservableCollection<Address>();
+        private ObservableCollection<Phone> _phones = new ObservableCollection<Phone>();
 
         public Guid ID { get => _id; set { _id = value; OnPropertyChanged(nameof(ID));  } }
         public string FirstName { get => _firstName; set { _firstName = value; OnPropertyChanged(nameof(FirstName)); OnPropertyChanged(nameof(ResultString)); } }
@@ -32,6 +35,8 @@ namespace AvaloniaApplication1.Models
         
         public ObservableCollection<Address> Addresses { get => _addresses; set { _addresses = value; OnPropertyChanged(nameof(Addresses)); OnPropertyChanged(nameof(ResultString)); } }
 
+        public ObservableCollection<Phone> Phones { get => _phones; set { _phones = value; OnPropertyChanged(nameof(Phones)); } }
+        public BirthInfo BirthInfoAttr { get => _birthInfo;set { _birthInfo = value;OnPropertyChanged(nameof(BirthInfoAttr)); } }
         
         public string ResultString
         {
@@ -76,12 +81,27 @@ namespace AvaloniaApplication1.Models
             Addresses = addresses;
             OnPropertyChanged();
         }
+        public void AddPhone(Phone phone)
+        {
+            var phones = Phones;
+            phones.Add(phone);
+            Phones = phones;
+            OnPropertyChanged();
+        }
 
         public void DeleteAddress(Address address)
         {
             var addresses = Addresses;
             addresses.Remove(address);
             Addresses = addresses;
+            OnPropertyChanged();
+        }
+
+        public void DeletePhone(Phone phone)
+        {
+            var phones = Phones;
+            phones.Remove(phone);
+            Phones = phones;
             OnPropertyChanged();
         }
     }
