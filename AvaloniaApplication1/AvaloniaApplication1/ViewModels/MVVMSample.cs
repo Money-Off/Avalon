@@ -33,11 +33,12 @@ namespace AvaloniaApplication1.ViewModels
         private ObservableCollection<string> _sexes = new ObservableCollection<string>() { "мужской","женский"};
 
         private Address? _selectedAddress = null;
-
-        private Address? _editedAddress = null;
-        public Address? SelectedAddress { get => _selectedAddress; set { _selectedAddress = value; OnPropertyChanged(nameof(SelectedAddress)); OnPropertyChanged(nameof(IsAddressSelected)); EditedAddress = value; } }
-        public Address? EditedAddress { get => _editedAddress; set { _editedAddress = value; OnPropertyChanged(nameof(EditedAddress)); } }
+        public Address? SelectedAddress { get => _selectedAddress; set { _selectedAddress = value; OnPropertyChanged(nameof(SelectedAddress)); OnPropertyChanged(nameof(IsAddressSelected)); } }
+        
+        private Phone? _selectedPhone = null;
+        public Phone? SelectedPhone { get => _selectedPhone; set { _selectedPhone = value; OnPropertyChanged(nameof(SelectedPhone)); OnPropertyChanged(nameof(IsPhoneSelected)); } }
         public bool IsAddressSelected { get => SelectedAddress is Address; }
+        public bool IsPhoneSelected { get => SelectedPhone is Phone; }
         public string SelectedSex { get => Employee.Sex; set { Employee.Sex = value; OnPropertyChanged(nameof(SelectedSex)); } }
 
         public ObservableCollection<Address> Addresses
@@ -50,6 +51,19 @@ namespace AvaloniaApplication1.ViewModels
             {
                 Employee.Addresses = value;
                 OnPropertyChanged(nameof(Addresses));
+                OnPropertyChanged(nameof(Employee));
+            }
+        }
+        public ObservableCollection<Phone> Phones
+        {
+            get
+            {
+                return Employee.Phones;
+            }
+            set
+            {
+                Employee.Phones = value;
+                OnPropertyChanged(nameof(Phones));
                 OnPropertyChanged(nameof(Employee));
             }
         }
@@ -67,7 +81,17 @@ namespace AvaloniaApplication1.ViewModels
 
 
 
-        public Employee Employee { get => _employee; set { _employee = value; OnPropertyChanged(nameof(Employee)); OnPropertyChanged(nameof(Addresses));OnPropertyChanged(nameof(SelectedSex)); } }
+        public Employee Employee 
+        { 
+            get => _employee; 
+            set 
+            { 
+                _employee = value; 
+                OnPropertyChanged(nameof(Employee)); 
+                OnPropertyChanged(nameof(Addresses));
+                OnPropertyChanged(nameof(Phones));
+                OnPropertyChanged(nameof(SelectedSex)); } 
+            }
 
         public MVVMSample()
         {
@@ -77,18 +101,24 @@ namespace AvaloniaApplication1.ViewModels
             CreateXMLCommand = ReactiveCommand.Create(CreateXML);
             ReadXMLCommand = ReactiveCommand.Create(ReadXML);
             DeleteAddressCommand = ReactiveCommand.Create(DeleteAddress);
+            OpenPhoneCommand = ReactiveCommand.Create<bool>(OpenPhone);
+            DeletePhoneCommand = ReactiveCommand.Create(DeletePhone);
 
         }
 
-        public MVVMSample(Employee employee, ObservableCollection<Address> addresses, Address selectedAddress)
+        public MVVMSample(Employee employee, ObservableCollection<Address> addresses, Address selectedAddress,ObservableCollection<Phone> phones, Phone selectedPhone)
         {
             Employee = employee;
             Addresses = addresses;
             SelectedAddress = selectedAddress;
+            Phones = phones;
+            SelectedPhone = selectedPhone;
             OpenAddressCommand = ReactiveCommand.Create<bool>(OpenAddress);
             CreateXMLCommand = ReactiveCommand.Create(CreateXML);
             ReadXMLCommand = ReactiveCommand.Create(ReadXML);
             DeleteAddressCommand = ReactiveCommand.Create(DeleteAddress);
+            OpenPhoneCommand = ReactiveCommand.Create<bool>(OpenPhone);
+            DeletePhoneCommand = ReactiveCommand.Create(DeletePhone);
         }
 
         public MVVMSample(Employee employee)
@@ -98,6 +128,8 @@ namespace AvaloniaApplication1.ViewModels
             CreateXMLCommand = ReactiveCommand.Create(CreateXML);
             ReadXMLCommand = ReactiveCommand.Create(ReadXML);
             DeleteAddressCommand = ReactiveCommand.Create(DeleteAddress);
+            OpenPhoneCommand = ReactiveCommand.Create<bool>(OpenPhone);
+            DeletePhoneCommand = ReactiveCommand.Create(DeletePhone);
         }
 
        
@@ -106,7 +138,6 @@ namespace AvaloniaApplication1.ViewModels
 
         private void OpenAddress(bool IsSelected = true)
         {
-            //Employee.AddAddress(EditedAddress);
             var addressWindow = new AddressWindow();
             if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime deckstop)
             {
@@ -125,6 +156,28 @@ namespace AvaloniaApplication1.ViewModels
                 }
             }
         }
+        public ReactiveCommand<bool,Unit> OpenPhoneCommand { get; }
+
+        private void OpenPhone(bool IsSelected = true)
+        {
+            var phoneWindow = new PhoneWindow();
+            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime deckstop)
+            {
+                if (deckstop.MainWindow is Window mainWindow)
+                {
+                    var selectedPhone = new Phone();
+                    if(IsSelected)
+                    {
+                        selectedPhone = SelectedPhone;
+                    }
+                    var phoneViewModel = new PhoneViewModel(selectedPhone, Employee);
+                    phoneWindow.DataContext = phoneViewModel;
+                    phoneWindow.ShowDialog(mainWindow);
+                    
+                    
+                }
+            }
+        }
         public ICommand DeleteAddressCommand { get; }
 
         private void DeleteAddress()
@@ -134,6 +187,16 @@ namespace AvaloniaApplication1.ViewModels
                 Employee.DeleteAddress(SelectedAddress);
             }
             SelectedAddress = null;
+        }
+        public ICommand DeletePhoneCommand { get; }
+
+        private void DeletePhone()
+        {
+            if(SelectedPhone != null)
+            {
+                Employee.DeletePhone(SelectedPhone);
+            }
+            SelectedPhone = null;
         }
 
         public ICommand CreateXMLCommand { get; }
