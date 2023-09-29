@@ -11,14 +11,14 @@ namespace AvaloniaApplication1.Models
         private DateTime? _issueDate = DateTime.Today;
         private string? _series;
         private string? _number;
-        private string? _issuePLace;
+        private string? _issuePlace;
 
         public DateTime? IssueDate { get { return _issueDate; } set { _issueDate = value; OnPropertyChanged(nameof(IssueDate)); } }
         public string? Series { get { return _series; } set { _series = value; OnPropertyChanged(nameof(Series)); } }
         public string? Number { get { return _number; } set { _number = value; OnPropertyChanged(nameof(Number)); } }
-        public string? IssuePLace { get { return _issuePLace; } set { _issuePLace = value; OnPropertyChanged(nameof(IssuePLace)); } }
+        public string? IssuePLace { get { return _issuePlace; } set { _issuePlace = value; OnPropertyChanged(nameof(IssuePLace)); } }
         public string? PassportData { get => GetPassportData(); }
-        private string GetPassportData()
+        protected virtual string GetPassportData()
         {
             var birthPlace = string.Empty;
 

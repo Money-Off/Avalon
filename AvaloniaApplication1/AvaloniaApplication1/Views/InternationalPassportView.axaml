@@ -1,0 +1,43 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:AvaloniaApplication1.ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="AvaloniaApplication1.Views.InternationalPassportView"
+			 x:DataType="vm:InternationalPassportViewModel">
+	<Grid ColumnDefinitions="100,200,Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+		<Grid DataContext="{Binding ResultPassport}" ShowGridLines="False" ColumnDefinitions="200, 500" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+			  Grid.Row="0" Grid.Column="0">
+
+			<Label Grid.Row="1" Grid.Column="0" Margin="10">Серия</Label>
+			<TextBox Text="{Binding Series}" Grid.Row="1" Grid.Column="1" Margin="0 5"/>
+
+			<Label Grid.Row="2" Grid.Column="0" Margin="10">Номер</Label>
+			<TextBox Text="{Binding Number}" Grid.Row="2" Grid.Column="1"></TextBox>
+
+
+			<Label Grid.Row="3" Grid.Column="0" Margin="10">Кем выдан</Label>
+			<TextBox Text="{Binding IssuePLace}"  Grid.Row="3" Grid.Column="1"></TextBox>
+
+
+			<Label Grid.Row="4" Grid.Column="0" Margin="10">Дата выдачи</Label>
+			<CalendarDatePicker SelectedDate="{Binding IssueDate}" Grid.Row="4" Grid.Column="1"></CalendarDatePicker>
+
+			<Label Grid.Row="5" Grid.Column="0" Margin="10">Дата окончания</Label>
+			<CalendarDatePicker SelectedDate="{Binding PassportEnd}" Grid.Row="5" Grid.Column="1"></CalendarDatePicker>
+
+
+
+
+		</Grid>
+		<Grid Grid.Row="1" Grid.Column="0" RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,Auto,Auto">
+			<Grid Grid.Row="0" Grid.Column="0">
+				<Button Content="OK" Command="{Binding ConfirmInternationalPassportCommand}"/>
+			</Grid>
+			<Grid Grid.Row="0" Grid.Column="1">
+				<Button Content="Отмена" Command="{Binding CancelInternationalPassportCommand}"/>
+			</Grid>
+		</Grid>
+	</Grid>
+</UserControl>

@@ -37,8 +37,13 @@ namespace AvaloniaApplication1.ViewModels
         
         private Phone? _selectedPhone = null;
         public Phone? SelectedPhone { get => _selectedPhone; set { _selectedPhone = value; OnPropertyChanged(nameof(SelectedPhone)); OnPropertyChanged(nameof(IsPhoneSelected)); } }
+        
+        private InternationalPassport? _selectedInternationalPassport = null;
+        public InternationalPassport? SelectedInternationalPassport { get => _selectedInternationalPassport; set { _selectedInternationalPassport = value; OnPropertyChanged(nameof(SelectedInternationalPassport)); OnPropertyChanged(nameof(IsInternationalPassportSelected)); } }
+        
         public bool IsAddressSelected { get => SelectedAddress is Address; }
         public bool IsPhoneSelected { get => SelectedPhone is Phone; }
+        public bool IsInternationalPassportSelected { get => SelectedInternationalPassport is InternationalPassport; }
         public string SelectedSex { get => Employee.Sex; set { Employee.Sex = value; OnPropertyChanged(nameof(SelectedSex)); } }
 
         public ObservableCollection<Address> Addresses
@@ -67,6 +72,19 @@ namespace AvaloniaApplication1.ViewModels
                 OnPropertyChanged(nameof(Employee));
             }
         }
+        public ObservableCollection<InternationalPassport> InternationalPassports
+        {
+            get
+            {
+                return Employee.InternationalPassports;
+            }
+            set
+            {
+                Employee.InternationalPassports = value;
+                OnPropertyChanged(nameof(InternationalPassports));
+                OnPropertyChanged(nameof(Employee));
+            }
+        }
         public ObservableCollection<string> Sexes
         {
             get
@@ -90,6 +108,7 @@ namespace AvaloniaApplication1.ViewModels
                 OnPropertyChanged(nameof(Employee)); 
                 OnPropertyChanged(nameof(Addresses));
                 OnPropertyChanged(nameof(Phones));
+                OnPropertyChanged(nameof(InternationalPassports));
                 OnPropertyChanged(nameof(SelectedSex)); } 
             }
 
@@ -103,6 +122,8 @@ namespace AvaloniaApplication1.ViewModels
             DeleteAddressCommand = ReactiveCommand.Create(DeleteAddress);
             OpenPhoneCommand = ReactiveCommand.Create<bool>(OpenPhone);
             DeletePhoneCommand = ReactiveCommand.Create(DeletePhone);
+            OpenInternationalPassportCommand = ReactiveCommand.Create<bool>(OpenInternationalPassport);
+            DeleteInternationalPassportCommand = ReactiveCommand.Create(DeleteInternationalPassport);
 
         }
 
@@ -119,6 +140,8 @@ namespace AvaloniaApplication1.ViewModels
             DeleteAddressCommand = ReactiveCommand.Create(DeleteAddress);
             OpenPhoneCommand = ReactiveCommand.Create<bool>(OpenPhone);
             DeletePhoneCommand = ReactiveCommand.Create(DeletePhone);
+            OpenInternationalPassportCommand = ReactiveCommand.Create<bool>(OpenInternationalPassport);
+            DeleteInternationalPassportCommand = ReactiveCommand.Create(DeleteInternationalPassport);
         }
 
         public MVVMSample(Employee employee)
@@ -130,6 +153,8 @@ namespace AvaloniaApplication1.ViewModels
             DeleteAddressCommand = ReactiveCommand.Create(DeleteAddress);
             OpenPhoneCommand = ReactiveCommand.Create<bool>(OpenPhone);
             DeletePhoneCommand = ReactiveCommand.Create(DeletePhone);
+            OpenInternationalPassportCommand = ReactiveCommand.Create<bool>(OpenInternationalPassport);
+            DeleteInternationalPassportCommand = ReactiveCommand.Create(DeleteInternationalPassport);
         }
 
        
@@ -178,6 +203,29 @@ namespace AvaloniaApplication1.ViewModels
                 }
             }
         }
+        public ReactiveCommand<bool,Unit> OpenInternationalPassportCommand { get; }
+
+        private void OpenInternationalPassport(bool IsSelected = true)
+        {
+            var internationalPassportWindow = new InternationalPassportWindow();
+            if (Application.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime deckstop)
+            {
+                if (deckstop.MainWindow is Window mainWindow)
+                {
+                    var selectedInternationalPassport = new InternationalPassport();
+                    if(IsSelected)
+                    {
+                        selectedInternationalPassport = SelectedInternationalPassport;
+                    }
+                    var internationalPassportViewModel = new InternationalPassportViewModel(selectedInternationalPassport, Employee);
+                    internationalPassportWindow.DataContext = internationalPassportViewModel;
+                    internationalPassportWindow.ShowDialog(mainWindow);
+                    
+                    
+                }
+            }
+        }
+
         public ICommand DeleteAddressCommand { get; }
 
         private void DeleteAddress()
@@ -197,6 +245,15 @@ namespace AvaloniaApplication1.ViewModels
                 Employee.DeletePhone(SelectedPhone);
             }
             SelectedPhone = null;
+        }
+        public ICommand DeleteInternationalPassportCommand { get; }
+        private void DeleteInternationalPassport()
+        {
+            if(SelectedInternationalPassport != null)
+            {
+                Employee.DeleteElement(SelectedInternationalPassport,Employee.InternationalPassports);
+            }
+            SelectedInternationalPassport = null;
         }
 
         public ICommand CreateXMLCommand { get; }

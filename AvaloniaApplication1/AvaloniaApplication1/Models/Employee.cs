@@ -20,9 +20,11 @@ namespace AvaloniaApplication1.Models
         private string _email = string.Empty;
 
         private BirthInfo _birthInfo = new BirthInfo();
+        private Passport _passport = new Passport();
 
         private ObservableCollection<Address> _addresses = new ObservableCollection<Address>();
         private ObservableCollection<Phone> _phones = new ObservableCollection<Phone>();
+        private ObservableCollection<InternationalPassport> _internationalPassports = new ObservableCollection<InternationalPassport>();
 
         public Guid ID { get => _id; set { _id = value; OnPropertyChanged(nameof(ID));  } }
         public string FirstName { get => _firstName; set { _firstName = value; OnPropertyChanged(nameof(FirstName)); OnPropertyChanged(nameof(ResultString)); } }
@@ -37,6 +39,9 @@ namespace AvaloniaApplication1.Models
 
         public ObservableCollection<Phone> Phones { get => _phones; set { _phones = value; OnPropertyChanged(nameof(Phones)); } }
         public BirthInfo BirthInfoAttr { get => _birthInfo;set { _birthInfo = value;OnPropertyChanged(nameof(BirthInfoAttr)); } }
+        public Passport Passport { get => _passport; set { _passport = value; OnPropertyChanged(nameof(Passport)); } }
+
+        public ObservableCollection<InternationalPassport> InternationalPassports { get => _internationalPassports; set { _internationalPassports = value; OnPropertyChanged(nameof(InternationalPassports)); } }
         
         public string ResultString
         {
@@ -73,7 +78,16 @@ namespace AvaloniaApplication1.Models
         { 
             _id = Guid.NewGuid();
         }
-
+        public void AddElement<T>(T element,ObservableCollection<T> collection)
+        {
+            collection.Add(element);
+            OnPropertyChanged();
+        }
+        public void DeleteElement<T>(T element,ObservableCollection<T> collection)
+        {
+            collection.Remove(element);
+            OnPropertyChanged();
+        }
         public void AddAddress(Address address)
         {
             var addresses = Addresses;
@@ -86,6 +100,13 @@ namespace AvaloniaApplication1.Models
             var phones = Phones;
             phones.Add(phone);
             Phones = phones;
+            OnPropertyChanged();
+        }
+        public void AddInternationalPassport(InternationalPassport passport)
+        {
+            var internationalPassports = InternationalPassports;
+            internationalPassports.Add(passport);
+            InternationalPassports = internationalPassports;
             OnPropertyChanged();
         }
 
@@ -102,6 +123,13 @@ namespace AvaloniaApplication1.Models
             var phones = Phones;
             phones.Remove(phone);
             Phones = phones;
+            OnPropertyChanged();
+        }
+        public void DeleteInternationalPassport(InternationalPassport passport)
+        {
+            var internationalPassports = InternationalPassports;
+            internationalPassports.Remove(passport);
+            InternationalPassports = internationalPassports;
             OnPropertyChanged();
         }
     }
