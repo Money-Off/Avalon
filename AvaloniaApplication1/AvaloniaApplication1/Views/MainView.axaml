@@ -159,8 +159,6 @@
 								<Label Grid.Row="3" Grid.Column="0" Margin="10">Выдан когда</Label>
 								<CalendarDatePicker SelectedDate="{Binding IssueDate}" Grid.Row="3" Grid.Column="1" Margin="0 5" Name="passportDate"></CalendarDatePicker>
 								
-								
-								
 							</Grid>
 							
 						</Grid>
