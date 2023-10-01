@@ -18,27 +18,27 @@
 				<StackPanel>
 				<Grid  DataContext="{Binding Employee}">
 					<Grid ShowGridLines="False" ColumnDefinitions="120, 100,100" RowDefinitions="Auto,Auto,Auto,Auto,Auto" >
-						<Label Grid.Row="0" Grid.Column="0" Margin="10">FirstName</Label>
+						<Label Grid.Row="1" Grid.Column="0" Margin="10">Имя</Label>
 						<TextBox Text="{Binding FirstName}" Grid.Row="0" Grid.Column="1" Margin="0 5" Name="firstName" ></TextBox>
-						<Label Grid.Row="1" Grid.Column="0" Margin="10">LastName</Label>
+						<Label Grid.Row="0" Grid.Column="0" Margin="10">Фамилия</Label>
 						<TextBox Text="{Binding LastName}" Grid.Row="1" Grid.Column="1" Margin="0 5" Name="lastName"></TextBox>
-						<Label Grid.Row="2" Grid.Column="0" Margin="10">MiddleName</Label>
+						<Label Grid.Row="2" Grid.Column="0" Margin="10">Отчество</Label>
 						<TextBox Text="{Binding MiddleName}" Grid.Row="2" Grid.Column="1" Margin="0 5" Name="middleName"></TextBox>
 					</Grid>
 				</Grid>
 				<Grid ColumnDefinitions="120, 200,200" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
-					<Label Grid.Row="3" Grid.Column="0" Margin="10">Sex</Label>
+					<Label Grid.Row="3" Grid.Column="0" Margin="10">Пол</Label>
 					<ComboBox ItemsSource="{Binding Path=Sexes}"
 								SelectedValue="{Binding Path=SelectedSex}" 
 								Grid.Row="3" Grid.Column="1" Margin="0 5" Name="sex"/>
 				</Grid>
 				<Grid  DataContext="{Binding Employee}">
 					<Grid ShowGridLines="False" ColumnDefinitions="120, 100,100" RowDefinitions="Auto,Auto,Auto,Auto,Auto" >
-						<Label Grid.Row="0" Grid.Column="0" Margin="10">INN</Label>
+						<Label Grid.Row="0" Grid.Column="0" Margin="10">ИНН</Label>
 						<TextBox Text="{Binding INN}" Grid.Row="0" Grid.Column="1" Margin="0 5" Name="inn" ></TextBox>
-						<Label Grid.Row="1" Grid.Column="0" Margin="10">SNILS</Label>
+						<Label Grid.Row="1" Grid.Column="0" Margin="10">СНИЛС</Label>
 						<TextBox Text="{Binding Snils}" Grid.Row="1" Grid.Column="1" Margin="0 5" Name="snils"></TextBox>
-						<Label Grid.Row="2" Grid.Column="0" Margin="10">E-MAIL</Label>
+						<Label Grid.Row="2" Grid.Column="0" Margin="10">Эл. Почта</Label>
 						<TextBox Text="{Binding Email}" Grid.Row="2" Grid.Column="1" Margin="0 5" Name="email"></TextBox>
 					</Grid>
 				</Grid>
@@ -60,7 +60,7 @@
 					</ListBox>
 
 					<Grid  Grid.Row="1" Grid.Column="0">
-						<Button Content="Add" Command="{Binding OpenAddressCommand}">
+						<Button Content="Добавить" Command="{Binding OpenAddressCommand}">
 							<Button.CommandParameter>
 								<sys:Boolean>false</sys:Boolean>
 							</Button.CommandParameter>
@@ -68,20 +68,20 @@
 						
 					</Grid>
 					<Grid  Grid.Row="1" Grid.Column="1">
-						<Button Content="Edit" Command="{Binding OpenAddressCommand}" IsEnabled="{Binding IsAddressSelected}">
+						<Button Content="Редактировать" Command="{Binding OpenAddressCommand}" IsEnabled="{Binding IsAddressSelected}">
 							<Button.CommandParameter>
 								<sys:Boolean>true</sys:Boolean>
 							</Button.CommandParameter>
 						</Button>
 					</Grid>
 					<Grid  Grid.Row="1" Grid.Column="2">
-						<Button Content="Delete" Command="{Binding DeleteAddressCommand}" IsEnabled="{Binding IsAddressSelected}"/>
+						<Button Content="Удалить" Command="{Binding DeleteAddressCommand}" IsEnabled="{Binding IsAddressSelected}"/>
 					</Grid>
 					<Grid Grid.Row="2" Grid.Column="2">
-						<Button  Content="CreateXML" Command="{Binding CreateXMLCommand}"/>
+						<Button  Content="Сохранить" Command="{Binding CreateXMLCommand}"/>
 					</Grid>
 					<Grid  Grid.Row="2" Grid.Column="0" >
-						<Button Content="DownloadXML" Command="{Binding ReadXMLCommand}"/>
+						<Button Content="Загрузить" Command="{Binding ReadXMLCommand}"/>
 					</Grid>
 
 				</Grid>
@@ -103,7 +103,7 @@
 					</ListBox>
 
 					<Grid  Grid.Row="1" Grid.Column="0">
-						<Button Content="Add" Command="{Binding OpenPhoneCommand}">
+						<Button Content="Добавить" Command="{Binding OpenPhoneCommand}">
 							<Button.CommandParameter>
 								<sys:Boolean>false</sys:Boolean>
 							</Button.CommandParameter>
@@ -111,14 +111,14 @@
 						
 					</Grid>
 					<Grid  Grid.Row="1" Grid.Column="1">
-						<Button Content="Edit" Command="{Binding OpenPhoneCommand}" IsEnabled="{Binding IsPhoneSelected}">
+						<Button Content="Редактировать" Command="{Binding OpenPhoneCommand}" IsEnabled="{Binding IsPhoneSelected}">
 							<Button.CommandParameter>
 								<sys:Boolean>true</sys:Boolean>
 							</Button.CommandParameter>
 						</Button>
 					</Grid>
 					<Grid  Grid.Row="1" Grid.Column="2">
-						<Button Content="Delete" Command="{Binding DeletePhoneCommand}" IsEnabled="{Binding IsPhoneSelected}"/>
+						<Button Content="Удалить" Command="{Binding DeletePhoneCommand}" IsEnabled="{Binding IsPhoneSelected}"/>
 					</Grid>
 
 				</Grid>
@@ -178,7 +178,7 @@
 						</ListBox.ItemTemplate>
 					</ListBox>
 					<Grid  Grid.Row="1" Grid.Column="0">
-						<Button Content="Add" Command="{Binding OpenInternationalPassportCommand}">
+						<Button Content="Добавить" Command="{Binding OpenInternationalPassportCommand}">
 							<Button.CommandParameter>
 								<sys:Boolean>false</sys:Boolean>
 							</Button.CommandParameter>
@@ -186,14 +186,14 @@
 
 					</Grid>
 					<Grid  Grid.Row="1" Grid.Column="1">
-						<Button Content="Edit" Command="{Binding OpenInternationalPassportCommand}" IsEnabled="{Binding IsInternationalPassportSelected}">
+						<Button Content="Редактировать" Command="{Binding OpenInternationalPassportCommand}" IsEnabled="{Binding IsInternationalPassportSelected}">
 							<Button.CommandParameter>
 								<sys:Boolean>true</sys:Boolean>
 							</Button.CommandParameter>
 						</Button>
 					</Grid>
 					<Grid  Grid.Row="1" Grid.Column="2">
-						<Button Content="Delete" Command="{Binding DeleteInternationalPassportCommand}" IsEnabled="{Binding IsInternationalPassportSelected}"/>
+						<Button Content="Удалить" Command="{Binding DeleteInternationalPassportCommand}" IsEnabled="{Binding IsInternationalPassportSelected}"/>
 					</Grid>
 				</StackPanel>		
 				
