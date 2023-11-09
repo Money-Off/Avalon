@@ -7,9 +7,13 @@
              x:Class="AvaloniaApplication1.Views.AddressView"			 
              x:DataType="vm:AddressViewModel">
 	
-	<Grid ColumnDefinitions="Auto,Auto,Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
-		<Grid DataContext="{Binding ResultAddress}" ShowGridLines="False" ColumnDefinitions="120, 500" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
+	<Grid ColumnDefinitions="Auto,Auto,Auto,Auto" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+		<Grid DataContext="{Binding ResultAddress}" ShowGridLines="False" ColumnDefinitions="120, 500" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
 			  Grid.Row="0" Grid.Column="0">
+	
+		<Label Grid.Row="0" Grid.Column="0" Margin="10">Тип адреса</Label>
+		<ComboBox ItemsSource="{Binding TypesOfAddress}"
+							   SelectedValue="{Binding TypeOfAddress}"  Grid.Row="0" Grid.Column="1"></ComboBox>
 	
 		<Label Grid.Row="1" Grid.Column="0" Margin="10">Страна</Label>
 		<TextBox Text="{Binding Country}"  Grid.Row="1" Grid.Column="1"></TextBox>
