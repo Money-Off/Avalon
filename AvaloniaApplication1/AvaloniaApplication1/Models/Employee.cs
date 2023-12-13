@@ -58,7 +58,7 @@ namespace AvaloniaApplication1.Models
                 if (MiddleName != null && MiddleName != string.Empty)
                     middle = $" {MiddleName.FirstOrDefault()}.";
                 if (Addresses != null && Addresses.Count != 0)
-                    address = $" проживает по адресу: {Addresses.FirstOrDefault().AddressString}.";
+                    address = $" проживает по адресу: {Addresses?.FirstOrDefault()?.AddressString}.";
 
                 var _result = $"{second}{first}{middle}{address}";
 

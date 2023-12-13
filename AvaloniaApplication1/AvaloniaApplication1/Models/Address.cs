@@ -1,6 +1,7 @@
 ﻿using AvaloniaApplication1.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -14,6 +15,7 @@ namespace AvaloniaApplication1.Models
     [Serializable]
     public class Address : BaseClass
     {
+        private string _typeOfAddress = string.Empty;
         private string _addressString = string.Empty;
         private Guid _id;
         private string _city = string.Empty;
@@ -21,6 +23,8 @@ namespace AvaloniaApplication1.Models
         private string _street = string.Empty;
         private string _house = string.Empty;
         private string _room = string.Empty;
+        
+        private ObservableCollection<string> _typesOfAddress = new ObservableCollection<string>() { "Адрес регистрации", "Фактический адрес" };
 
         [XmlIgnore]
         public string AddressString { get => GetFullAddress(); private set { _addressString = value; OnPropertyChanged();  } }
@@ -29,16 +33,20 @@ namespace AvaloniaApplication1.Models
         public string Street { get => _street; set { _street = value; OnPropertyChanged(); OnPropertyChanged(nameof(AddressString)); } }
         public string House { get => _house; set { _house = value; OnPropertyChanged(); OnPropertyChanged(nameof(AddressString)); } }
         public string Room { get => _room; set { _room = value; OnPropertyChanged(); OnPropertyChanged(nameof(AddressString)); } }
+        [XmlIgnore]
+        public ObservableCollection<string> TypesOfAddress { get => _typesOfAddress; set { _typesOfAddress = value; OnPropertyChanged(); } }
+        public string TypeOfAddress { get => _typeOfAddress; set { _typeOfAddress = value; OnPropertyChanged(); } }
         public Guid ID { get => _id; set { _id = value; OnPropertyChanged(); } }
 
 
-        public Address(string country, string city, string street, string house, string room)
+        public Address(string country, string city, string street, string house, string room, string typeOfAddress)
         { 
             Country = country;
             City = city;
             Street = street;
             House = house;
             Room = room;
+            TypeOfAddress = typeOfAddress;
             ID = Guid.NewGuid();
             AddressString = GetFullAddress();
         }
@@ -46,18 +54,7 @@ namespace AvaloniaApplication1.Models
         { 
             ID = Guid.NewGuid(); 
         }
-
-        public Address(AddressMVVM addressMVVM)
-        {
-            Country = addressMVVM.Country;
-            City = addressMVVM.City;
-            Street = addressMVVM.Street;
-            House = addressMVVM.House;
-            Room = addressMVVM.Room;
-            ID = Guid.NewGuid();
-            AddressString = GetFullAddress();
-
-        }
+       
         public Address(Address address)
         {
             Country = address.Country;
@@ -66,6 +63,7 @@ namespace AvaloniaApplication1.Models
             House = address.House;
             Room = address.Room;
             ID = address.ID;
+            TypeOfAddress = address.TypeOfAddress;
             AddressString = GetFullAddress();
 
         }
